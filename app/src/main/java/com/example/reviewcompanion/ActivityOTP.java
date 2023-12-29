@@ -15,7 +15,6 @@ public class ActivityOTP extends AppCompatActivity {
     String finalOTP = null;
     DatabaseOTP databaseOTP = new DatabaseOTP(this);
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
