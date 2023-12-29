@@ -71,9 +71,9 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/score_history"
             android:layout_width="wrap_content"
-            android:onClick="startActivityBasedOnButton"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:onClick="startActivityBasedOnButton"
             app:layout_gravity="fill"
             app:layout_rowWeight="1">
 
@@ -111,7 +111,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/category55"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -120,7 +119,6 @@
                     android:textSize="25sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
         <androidx.cardview.widget.CardView
             android:id="@+id/about_us"
             android:layout_width="wrap_content"

@@ -1,10 +1,10 @@
 package com.example.reviewcompanion;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ActivityMainInterface extends AppCompatActivity {
 
@@ -13,6 +13,7 @@ public class ActivityMainInterface extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_interface);
     }
+
     public void startActivityBasedOnButton(View view) {
         Intent intent = null;
         if (view.getId() == R.id.take_quiz) {
@@ -24,6 +25,9 @@ public class ActivityMainInterface extends AppCompatActivity {
         } else if (view.getId() == R.id.about_us) {
             intent = new Intent(this, ActivityAboutUs.class);
         }
-        startActivity(intent);
+
+        if (intent != null) {
+            startActivity(intent);
+        }
     }
 }

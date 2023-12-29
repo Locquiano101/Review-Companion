@@ -6,11 +6,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class ActivityPreInterface extends AppCompatActivity {
+    CountDownTimer countDownTimer;
+    int totalTime = 10000; // Total time in milliseconds (e.g., 10 seconds)
     ProgressBar progressBar;
     TextView progressText;
     DatabaseVariableHolder variableCategory = new DatabaseVariableHolder();
@@ -29,13 +32,43 @@ public class ActivityPreInterface extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         progressText = findViewById(R.id.indicator);
 
-        InsertInitialQuestions();
+        DatabaseQuestions databaseHelper = new DatabaseQuestions(this);
+        boolean isTableEmpty = databaseHelper.isTableEmpty();
+
+        if (isTableEmpty) {
+            InsertInitialQuestions();//Table is empty, perform your desired actions here
+        } else {
+            startProgressBarCountup();// Table is not empty, perform other actions here
+            progressText.setText("Loading Questions...");
+        }
+    }
+    private void startProgressBarCountup() {
+        final int maxProgress = 100; // Assuming maximum progress value
+        countDownTimer = new CountDownTimer(totalTime, 500) {
+            int progress = 0;
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Calculate progress in reverse
+                progress = (int) (((totalTime - millisUntilFinished) * maxProgress) / totalTime);
+
+                // Set progress for the ProgressBar
+                progressBar.setProgress(progress);
+            }
+            @Override
+            public void onFinish() {
+                // Hide the progress bar when the countdown finishes
+                progressBar.setVisibility(View.GONE);
+                progressText.setVisibility(View.GONE);
+                Intent intent = new Intent(ActivityPreInterface.this, ActivityMainInterface.class);
+                startActivity(intent);
+            }
+        }.start();
     }
 
 
     @SuppressLint("StaticFieldLeak")
     public void InsertInitialQuestions() {
-        ProgressBar progressBar = findViewById(R.id.progress_bar);
 
         DatabaseQuestions myDB = new DatabaseQuestions(this);
 
