@@ -4,6 +4,264 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fourth_color"
     tools:context=".ActivityChooseQuiz">
 
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/fourth_color"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/category_choices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Choose Category"
+            android:textColor="@color/main_color"
+            android:textSize="38dp"
+            android:textStyle="bold|italic" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.gridlayout.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:columnCount="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/afar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="startActivityBasedOnButton"
+                app:layout_gravity="fill"
+                app:layout_rowWeight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/main_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="AFAR"
+                        android:textColor="@color/fourth_color"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/auditing"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:onClick="startActivityBasedOnButton"
+                app:layout_gravity="fill"
+                app:layout_rowWeight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/main_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Auditing"
+                        android:textColor="@color/fourth_color"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/far"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="startActivityBasedOnButton"
+                app:layout_gravity="fill"
+                app:layout_rowWeight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/main_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:gravity="center"
+                        android:text="FAR"
+                        android:textColor="@color/fourth_color"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/law"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@color/main_color"
+                android:onClick="startActivityBasedOnButton"
+                app:layout_gravity="fill"
+                app:layout_rowWeight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/main_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Law"
+                        android:textColor="@color/fourth_color"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/MS"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@color/main_color"
+                android:onClick="startActivityBasedOnButton"
+                app:layout_gravity="fill"
+                app:layout_rowWeight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/main_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="MS"
+                        android:textColor="@color/fourth_color"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Tax"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@color/main_color"
+                android:onClick="startActivityBasedOnButton"
+                app:layout_gravity="fill"
+                app:layout_rowWeight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/main_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/category66"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Tax"
+                        android:textColor="@color/fourth_color"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.gridlayout.widget.GridLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/frameLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/total_number_of_questions"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Total No. of Questions"
+                android:inputType="number|none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/total_number_of_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Set Timer"
+                android:inputType="number|none"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:onClick="take_quiz"
+            android:text="TAKE QUIZ" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

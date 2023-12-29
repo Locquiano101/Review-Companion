@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     tools:context=".ActivityOTP">
 
@@ -27,7 +27,7 @@
         android:layout_below="@+id/Logo_View"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Activation Code"
+        android:text="Input Activation Code"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -126,7 +126,7 @@
         android:backgroundTint="@color/black"
         android:onClick="activate_app"
         android:padding="10dp"
-        android:text="Enter"
+        android:text="Activate App"
         android:textColor="#C9A87B"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -17,7 +17,7 @@ public class ActivityMainInterface extends AppCompatActivity {
     public void startActivityBasedOnButton(View view) {
         Intent intent = null;
         if (view.getId() == R.id.take_quiz) {
-            intent = new Intent(this, ActivityTakeQuiz.class);
+            intent = new Intent(this, ActivityChooseQuiz.class);
         } else if (view.getId() == R.id.score_history) {
             intent = new Intent(this, ActivityScoreQuiz.class);
         } else if (view.getId() == R.id.settings) {

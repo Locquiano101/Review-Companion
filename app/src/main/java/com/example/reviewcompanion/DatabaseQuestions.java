@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DatabaseQuestions extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "QuizHolder.db";
     private static final int DATABASE_VERSION = 1;
@@ -17,11 +19,9 @@ public class DatabaseQuestions extends SQLiteOpenHelper {
     static final String COLUMN_CHOICE_C = "choice_c";
     static final String COLUMN_CHOICE_D = "choice_d";
     static final String COLUMN_ANSWERS = "answer";
-
     public DatabaseQuestions(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
@@ -36,7 +36,6 @@ public class DatabaseQuestions extends SQLiteOpenHelper {
 
         db.execSQL(query);
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
@@ -58,8 +57,6 @@ public class DatabaseQuestions extends SQLiteOpenHelper {
 
         db.insert(TABLE_NAME, null, cv);
     }
-
-
     boolean isTableEmpty() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT count(*) FROM " + TABLE_NAME, null);
@@ -71,4 +68,49 @@ public class DatabaseQuestions extends SQLiteOpenHelper {
         }
         return true;
     }
+
+
+    public ArrayList<DatabaseVariableHolder> FetchQuestionsForQuiz(String category, int limit) {
+        SQLiteDatabase getDB = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE subject = ? LIMIT ?";
+
+        ArrayList<DatabaseVariableHolder> arrayList = new ArrayList<>();
+        String[] selectionArgs = new String[]{category, String.valueOf(limit)};
+
+        Cursor cursor = getDB.rawQuery(query, selectionArgs);
+
+        while (cursor.moveToNext()) {
+            DatabaseVariableHolder DatabaseVariableHolder = new DatabaseVariableHolder();
+            DatabaseVariableHolder.subject = cursor.getString(1);
+            DatabaseVariableHolder.question = cursor.getString(2);
+            DatabaseVariableHolder.choice_1 = cursor.getString(3);
+            DatabaseVariableHolder.choice_2 = cursor.getString(4);
+            DatabaseVariableHolder.choice_3 = cursor.getString(5);
+            DatabaseVariableHolder.choice_4 = cursor.getString(6);
+            DatabaseVariableHolder.answer = cursor.getString(7);
+
+            arrayList.add(DatabaseVariableHolder);
+        }
+
+        cursor.close();
+        return arrayList;
+    }
+
+    public int getTotalQuestionsForCategory(String category) {
+        SQLiteDatabase getDB = this.getReadableDatabase();
+        String query = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE subject = ?";
+        int totalQuestions = 0;
+
+        Cursor cursor = getDB.rawQuery(query, new String[]{category});
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                totalQuestions = cursor.getInt(0); // Retrieves the count from the first column
+            }
+            cursor.close();
+        }
+        return totalQuestions;
+    }
+
+
 }
