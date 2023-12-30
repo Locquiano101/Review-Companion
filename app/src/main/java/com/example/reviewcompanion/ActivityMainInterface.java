@@ -1,6 +1,7 @@
 package com.example.reviewcompanion;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,6 +13,8 @@ public class ActivityMainInterface extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_interface);
+        MediaPlayer music = MediaPlayer.create(ActivityMainInterface.this, R.raw.korn);
+        music.start();
     }
 
     public void startActivityBasedOnButton(View view) {

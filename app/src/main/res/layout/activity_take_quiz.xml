@@ -6,4 +6,89 @@
     android:layout_height="match_parent"
     tools:context=".ActivityTakeQuiz">
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/remaining_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="1/5"
+            android:textColor="#090505"
+            android:textSize="25sp" />
+
+
+        <TextView
+            android:id="@+id/question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Question"
+            android:textSize="25sp" />
+
+        <RadioGroup
+            android:id="@+id/group_choice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <RadioButton
+                android:id="@+id/choice_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="RadioButton"
+                android:textColor="#000000" />
+
+            <RadioButton
+                android:id="@+id/choice_b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="RadioButton"
+                android:textColor="#000000" />
+
+            <RadioButton
+                android:id="@+id/choice_c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="RadioButton"
+                android:textColor="@color/black" />
+
+            <RadioButton
+                android:id="@+id/choice_d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="RadioButton"
+                android:textColor="@color/black" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000"
+            android:onClick="next_question"
+            android:padding="16dp"
+            android:text="Next Question"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

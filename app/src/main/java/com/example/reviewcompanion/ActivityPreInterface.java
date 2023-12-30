@@ -44,7 +44,7 @@ public class ActivityPreInterface extends AppCompatActivity {
     }
     private void startProgressBarCountup() {
         final int maxProgress = 100; // Assuming maximum progress value
-        countDownTimer = new CountDownTimer(totalTime, 500) {
+        countDownTimer = new CountDownTimer(totalTime, 10 ) {
             int progress = 0;
 
             @Override
@@ -65,16 +65,12 @@ public class ActivityPreInterface extends AppCompatActivity {
             }
         }.start();
     }
-
-
     @SuppressLint("StaticFieldLeak")
     public void InsertInitialQuestions() {
 
         DatabaseQuestions myDB = new DatabaseQuestions(this);
-
         final int[] totalQuestions = {0};
         final int[] currentQuestion = {0};
-
         new AsyncTask<Void, Integer, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
