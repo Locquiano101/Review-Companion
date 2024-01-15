@@ -22,13 +22,13 @@
             android:name=".ActivityScoreHistory"
             android:exported="false" />
         <activity
-            android:name=".ActivityScoreQuiz"
+            android:name=".ActivityQuizScore"
             android:exported="false" />
         <activity
-            android:name=".ActivityTakeQuiz"
+            android:name=".ActivityQuizTake"
             android:exported="false" />
         <activity
-            android:name=".ActivityChooseQuiz"
+            android:name=".ActivityQuizChooseCategory"
             android:exported="false" />
         <activity
             android:name=".ActivityMainInterface"

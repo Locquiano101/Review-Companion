@@ -10,9 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ActivityChooseQuiz extends AppCompatActivity {
-    // TODO: GET THE TOTAL LIMIT OF EACH CATEGORY
-    // TODO: SET A LIMIT FOR THE TIMER
+public class ActivityQuizChooseCategory extends AppCompatActivity {
+
 
     private AutoCompleteTextView TotalQuestionNum, TotalTimerSet;
 
@@ -26,6 +25,8 @@ public class ActivityChooseQuiz extends AppCompatActivity {
         setContentView(R.layout.activity_choose_quiz);
         TotalQuestionNum = findViewById(R.id.total_number_of_questions);
         TotalTimerSet = findViewById(R.id.total_number_of_time);
+        TotalQuestionNum.setEnabled(false);
+        TotalTimerSet.setEnabled(false);
     }
 
     private void populateQuizTimer() {
@@ -97,45 +98,61 @@ public class ActivityChooseQuiz extends AppCompatActivity {
         totalNumberOfQuestionPerCategory = DatabaseQuestions.getTotalQuestionsForCategory(category);
         populateTotalQuizNumber();
         populateQuizTimer();
-        /*MAKE THIS INTO COLOR CHANGING SHIT*/
+        TotalQuestionNum.setEnabled(true);
+        TotalTimerSet.setEnabled(true);
         Toast.makeText(this, "Total Questions for Subject " + category + ": " + totalNumberOfQuestionPerCategory, Toast.LENGTH_SHORT).show();
     }
-
     public void take_quiz(View view) {
-        String selectedNumber = TotalQuestionNum.getText().toString();
-        if (!selectedNumber.isEmpty()) {
-            try {
-                int totalQuestionNumInput = Integer.parseInt(selectedNumber);
-                if (totalQuestionNumInput > totalNumberOfQuestionPerCategory) {
+        String selectedNumber = TotalQuestionNum.getText().toString().trim();
+        String selectedTimeLimit = TotalTimerSet.getText().toString().trim();
+        int totalTimeLimitInput = 0, totalQuestionNumInput = 0;
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Exceeded Limit")
-                            .setMessage("You have exceeded the total question limit.")
-                            .setPositiveButton("OK", (dialog, which) -> {
-                                // Clear the field or perform any other actions
-                                TotalQuestionNum.setText(null); // Clear the field
-                            })
-                            .show();
-                } else {
+        if (category == null) {
+            showAlertDialog("Please Select quiz category");
 
-                    if (category != null) {
-                        Intent intent = new Intent(this, ActivityTakeQuiz.class);
-
-                        intent.putExtra("totalQuestionNumInput", totalQuestionNumInput);
-                        intent.putExtra("quiz_category", category);
-
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(this, "Please Select quiz category", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-            } catch (NumberFormatException e) {
-                Toast.makeText(this, "Invalid number format for total number of questions", Toast.LENGTH_SHORT).show();
-            }
-
-        } else {
-            Toast.makeText(this, "Please Select total number of questions", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        if (selectedNumber.isEmpty() && selectedTimeLimit.isEmpty()) {
+            showAlertDialog("Please Fill up the Boxes");
+            return;
+        }
+
+        try {
+            totalTimeLimitInput = Integer.parseInt(selectedTimeLimit);
+            totalQuestionNumInput = Integer.parseInt(selectedNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (totalTimeLimitInput <= 0) {
+            showAlertDialog("Please Enter a valid time limit");
+            return;
+        }
+
+        if (totalQuestionNumInput <= 0) {
+            showAlertDialog("Please Select a valid number of questions");
+            return;
+        }
+
+        if (totalQuestionNumInput > totalNumberOfQuestionPerCategory) {
+            showAlertDialog("You have exceeded the total question limit for " + category
+                    + "\nTotal Number of questions: " + totalNumberOfQuestionPerCategory);
+            return;
+        }
+
+        Intent intent = new Intent(this, ActivityQuizTake.class);
+        intent.putExtra("totalQuestionNumInput", totalQuestionNumInput);
+        intent.putExtra("totalTimeLimitInput", totalTimeLimitInput);
+        intent.putExtra("quiz_category", category);
+        startActivity(intent);
+        MusicManager.stopMusic();
+    }
+    private void showAlertDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(null)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> TotalQuestionNum.setText(null))
+                .show();
     }
 }

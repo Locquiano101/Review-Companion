@@ -15,7 +15,6 @@ public class VariableAFAR {
                 "Question 10"
         };
     }
-
     public static String[] ChoiceA() {
         return new String[]{
                 "Choice A for Question 1",
@@ -30,7 +29,6 @@ public class VariableAFAR {
                 "Choice A for Question 10"
         };
     }
-
     public static String[] ChoiceB() {
         return new String[]{
                 "Choice B for Question 1",
@@ -45,7 +43,6 @@ public class VariableAFAR {
                 "Choice B for Question 10"
         };
     }
-
     public static String[] ChoiceC() {
         return new String[]{
                 "Choice C for Question 1",
@@ -60,7 +57,6 @@ public class VariableAFAR {
                 "Choice C for Question 10"
         };
     }
-
     public static String[] ChoiceD() {
         return new String[]{
                 "Choice D for Question 1",
@@ -75,7 +71,6 @@ public class VariableAFAR {
                 "Choice D for Question 10"
         };
     }
-
     public static String[] Answers() {
         return new String[]{
                 "Choice A for Question 1",

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
@@ -68,33 +69,33 @@ public class DatabaseQuestions extends SQLiteOpenHelper {
         }
         return true;
     }
-
-
-    public ArrayList<DatabaseVariableHolder> FetchQuestionsForQuiz(String category, int limit) {
+    public ArrayList<DatabaseVariableHolder> fetchQuestionsForQuiz(String category, int limit) {
         SQLiteDatabase getDB = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE subject = ? LIMIT ?";
-
         ArrayList<DatabaseVariableHolder> arrayList = new ArrayList<>();
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE Subject = ? LIMIT ?";
         String[] selectionArgs = new String[]{category, String.valueOf(limit)};
 
-        Cursor cursor = getDB.rawQuery(query, selectionArgs);
+        try (Cursor cursor = getDB.rawQuery(query, selectionArgs)) {
+            while (cursor != null && cursor.moveToNext()) {
+                DatabaseVariableHolder dbVariableHolder = new DatabaseVariableHolder();
+                dbVariableHolder.question = cursor.getString(1);
+                dbVariableHolder.choice_1 = cursor.getString(2);
+                dbVariableHolder.choice_2 = cursor.getString(3);
+                dbVariableHolder.choice_3 = cursor.getString(4);
+                dbVariableHolder.choice_4 = cursor.getString(5);
+                dbVariableHolder.answer = cursor.getString(6);
 
-        while (cursor.moveToNext()) {
-            DatabaseVariableHolder DatabaseVariableHolder = new DatabaseVariableHolder();
-            DatabaseVariableHolder.subject = cursor.getString(1);
-            DatabaseVariableHolder.question = cursor.getString(2);
-            DatabaseVariableHolder.choice_1 = cursor.getString(3);
-            DatabaseVariableHolder.choice_2 = cursor.getString(4);
-            DatabaseVariableHolder.choice_3 = cursor.getString(5);
-            DatabaseVariableHolder.choice_4 = cursor.getString(6);
-            DatabaseVariableHolder.answer = cursor.getString(7);
-
-            arrayList.add(DatabaseVariableHolder);
+                arrayList.add(dbVariableHolder);
+            }
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        } finally {
+            getDB.close(); // Close the database when done
         }
-
-        cursor.close();
         return arrayList;
     }
+
 
     public int getTotalQuestionsForCategory(String category) {
         SQLiteDatabase getDB = this.getReadableDatabase();

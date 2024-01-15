@@ -38,23 +38,23 @@ public class ActivityPreInterface extends AppCompatActivity {
         if (isTableEmpty) {
             InsertInitialQuestions();//Table is empty, perform your desired actions here
         } else {
-            startProgressBarCountup();// Table is not empty, perform other actions here
+            CountUp();// Table is not empty, perform other actions here
             progressText.setText("Loading Questions...");
         }
     }
-    private void startProgressBarCountup() {
-        final int maxProgress = 100; // Assuming maximum progress value
-        countDownTimer = new CountDownTimer(totalTime, 10 ) {
-            int progress = 0;
-
+    private void CountUp() {
+        final int totalTime = 1000; // Set total time to 3000 milliseconds (3 seconds)
+        final int maxProgress = 100; // Assuming maximum progress value is 100
+        countDownTimer = new CountDownTimer(totalTime, 100) {
             @Override
             public void onTick(long millisUntilFinished) {
                 // Calculate progress in reverse
-                progress = (int) (((totalTime - millisUntilFinished) * maxProgress) / totalTime);
+                int progress = (int) (((totalTime - millisUntilFinished) * maxProgress) / totalTime);
 
                 // Set progress for the ProgressBar
                 progressBar.setProgress(progress);
             }
+
             @Override
             public void onFinish() {
                 // Hide the progress bar when the countdown finishes
@@ -65,6 +65,7 @@ public class ActivityPreInterface extends AppCompatActivity {
             }
         }.start();
     }
+
     @SuppressLint("StaticFieldLeak")
     public void InsertInitialQuestions() {
 
@@ -90,7 +91,7 @@ public class ActivityPreInterface extends AppCompatActivity {
                         currentQuestion[0]++;
 
                         try {
-                            Thread.sleep(100); // Adjust delay time as needed
+                            Thread.sleep(10); // Adjust delay time as needed
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

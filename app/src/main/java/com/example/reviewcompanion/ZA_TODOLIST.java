@@ -12,5 +12,6 @@ public class ZA_TODOLIST {
      *    question from each category
      *  - add function where i'd be able to get question for each category.
      *  - WHAT THE FUCK ANDAMI PALA
+     *  - ADD A FUCNTION (UPDATE) NA KAPAG CLINICK YUNG CARD VIEW SA QUERSTION MAKIKITA YUNG TOTAL QUESTIONS
      */
 }
