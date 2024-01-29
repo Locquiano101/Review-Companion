@@ -19,12 +19,7 @@ public class ActivityMainInterface extends AppCompatActivity {
 
         _preferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
 
-        boolean isMusicPlaying = _preferences.getBoolean("musicPlaying", false); // Change `false` to your desired default boolean value
-        if (isMusicPlaying) {
             MusicManager.startMusic();
-        } else {
-            MusicManager.stopMusic();
-        }
     }
 
     public void startActivityBasedOnButton(View view) {
@@ -32,7 +27,7 @@ public class ActivityMainInterface extends AppCompatActivity {
         if (view.getId() == R.id.take_quiz) {
             intent = new Intent(this, ActivityQuizChooseCategory.class);
         } else if (view.getId() == R.id.score_history) {
-            intent = new Intent(this, ActivityQuizScore.class);
+            intent = new Intent(this, ActivityScoreHistory.class);
         } else if (view.getId() == R.id.settings) {
             intent = new Intent(this, ActivitySettings.class);
         } else if (view.getId() == R.id.about_us) {
